@@ -9,18 +9,18 @@ const Home =() =>(
         </Helmet>
         <div id="home">
             <section>
-                <div>
-                    <span className="mdi mdi-cube-outline"></span>
+                <div style={{textAlign:'center'}}>
+                    <span className="mdi mdi-cube-outline cube"></span>
                 </div>
                 <h1> Quick Quiz</h1>
                 <div className="play-button-container">
                     <ul>
-                        <li><Link to="/play/instructions">Play</Link></li>
+                        <li><Link className="play-button" to="/play/instructions">Play</Link></li>
                     </ul>
                 </div>
                 <div className="auth-container">
-                    <Link to="/login">Login</Link>
-                    <Link to="/register">Register</Link>    
+                    <Link className="auth-buttons" id="login-button" to="/login" >Login</Link>
+                    <Link className="auth-buttons" id="signup-button" to="/register">Register</Link>    
 
                 </div>
             </section>

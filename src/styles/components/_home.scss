@@ -1,0 +1,59 @@
+#home{
+    background-image: url('../../assets/img/background.jpg');
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    justify-content: space-around;
+    height:100vh;
+    width: 100vw;
+
+
+    section{
+        background-color: rgba(0, 0, 0, 0.7);
+        padding-left: $md;
+        padding-right:$md;
+        height: 80%;
+        width: 35%;
+    }
+
+    .cube{
+        font-size: 8rem;
+        color:$orange;
+        
+    }
+    h1{
+        text-align: center;
+        color: $off-white;
+        font-size: $lg;
+    }
+    .play-button-container{
+        width: 100%;
+    }
+    a.play-button{
+        background-color: $green;
+        color: #ffffff;
+        cursor: pointer;
+        padding: $normal;
+    }
+    .auth-container{
+        width: 100%;
+        display: flex;
+        justify-content: space-around;
+    }
+    #login-button {
+        background-color: $red;
+    }
+    #signup-button {
+        background-color: $green;
+    }
+    .auth-container .auth-buttons {
+        color: #ffffff;
+        cursor: pointer;
+        border-radius: 30px;
+        padding: $normal 0;
+        text-align: center;
+        width: 45%;
+
+    }
+
+}
