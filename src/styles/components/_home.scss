@@ -25,6 +25,7 @@
         text-align: center;
         color: $off-white;
         font-size: $lg;
+        font-weight: 400;
     }
     .play-button-container{
         width: 100%;
@@ -34,26 +35,42 @@
         color: #ffffff;
         cursor: pointer;
         padding: $normal;
+        display: block;
+        border-radius: $button-radius;
+        text-align: center;
+        transition: 0.3s linear all;
+    }
+    a.play-button:hover{
+        background-color: darken($green, 10%);
     }
     .auth-container{
         width: 100%;
         display: flex;
         justify-content: space-around;
+        margin-top: $lg;
     }
+
     #login-button {
         background-color: $red;
     }
+    
+    #login-button:hover {
+        background-color: darken($red, 10%);
+    }
     #signup-button {
-        background-color: $green;
+        background-color: $blue;
+    }
+    #signup-button:hover {
+        background-color: darken($blue, 10%);
     }
     .auth-container .auth-buttons {
         color: #ffffff;
         cursor: pointer;
-        border-radius: 30px;
+        border-radius: $button-radius;
         padding: $normal 0;
         text-align: center;
         width: 45%;
-
+        transition: 0.3s linear all;
     }
 
 }
