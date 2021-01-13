@@ -10,6 +10,7 @@
 
     section{
         background-color: rgba(0, 0, 0, 0.7);
+        border-radius: 5px;
         padding-left: $md;
         padding-right:$md;
         height: 80%;
@@ -42,11 +43,13 @@
     }
     a.play-button:hover{
         background-color: darken($green, 10%);
+        box-shadow: $shadow;
+
     }
     .auth-container{
         width: 100%;
         display: flex;
-        justify-content: space-around;
+        justify-content: space-between;
         margin-top: $lg;
     }
 
@@ -56,12 +59,16 @@
     
     #login-button:hover {
         background-color: darken($red, 10%);
+        box-shadow: $shadow;
+        
     }
     #signup-button {
         background-color: $blue;
     }
     #signup-button:hover {
         background-color: darken($blue, 10%);
+        box-shadow: $shadow;
+
     }
     .auth-container .auth-buttons {
         color: #ffffff;
@@ -73,4 +80,12 @@
         transition: 0.3s linear all;
     }
 
+}
+
+@media (max-width:768px) {
+    #home section {
+        padding: 0 $normal;
+        width: 100%;
+        height: 100%;
+    }
 }
