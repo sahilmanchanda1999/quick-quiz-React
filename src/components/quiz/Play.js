@@ -1,5 +1,7 @@
 import React, { Fragment } from "react";
 import Helmet from "react-helmet";
+import M from "materialize-css";
+
 import questions from "../../questions.json";
 import isEmpty from "../../utils/is-empty";
 
@@ -60,6 +62,39 @@ class Play extends React.Component {
       });
     }
   };
+  handleOptionClick = (e) => {
+    if (e.target.innerHTML.toLowerCase() === this.state.answer.toLowerCase()) {
+      this.correctAnswer();
+    } else {
+      this.wrongAnswer();
+    }
+  };
+  correctAnswer = () => {
+    M.toast({
+      html: "Correct Answer!",
+      classes: "toast-valid",
+      displayLength: 1500,
+    });
+    this.setState((prevState) => ({
+      score: prevState.score + 1,
+      correctAnswers: prevState.correctAnswers + 1,
+      currentQuestionIndex: prevState.currentQuestionIndex + 1,
+      numberOfAnsweredQuestions: prevState.numberOfAnsweredQuestions + 1,
+    }));
+  };
+  wrongAnswer = () => {
+    navigator.vibrate(1000);
+    M.toast({
+      html: "Wrong Answer!",
+      classes: "toast-invalid",
+      displayLength: 1500,
+    });
+    this.setState((prevState) => ({
+      wrongAnswers: prevState.wrongAnswers + 1,
+      currentQuestionIndex: prevState.currentQuestionIndex + 1,
+      numberOfAnsweredQuestions: prevState.numberOfAnsweredQuestions + 1,
+    }));
+  };
   render() {
     const { currentQuestion } = this.state;
     return (
@@ -90,12 +125,20 @@ class Play extends React.Component {
           </div>
           <h5>{currentQuestion.question}</h5>
           <div className="options-container">
-            <p className="option">{currentQuestion.optionA}</p>
-            <p className="option">{currentQuestion.optionB}</p>
+            <p onClick={this.handleOptionClick} className="option">
+              {currentQuestion.optionA}
+            </p>
+            <p onClick={this.handleOptionClick} className="option">
+              {currentQuestion.optionB}
+            </p>
           </div>
           <div className="options-container">
-            <p className="option">{currentQuestion.optionC}</p>
-            <p className="option">{currentQuestion.optionD}</p>
+            <p onClick={this.handleOptionClick} className="option">
+              {currentQuestion.optionC}
+            </p>
+            <p onClick={this.handleOptionClick} className="option">
+              {currentQuestion.optionD}
+            </p>
           </div>
           <div className="button-container">
             <button>Previous</button>

@@ -1,7 +1,17 @@
 * {
-    padding: 0;
-    margin: 0;
+  padding: 0;
+  margin: 0;
 }
-body{
-    font-family: $quicksand;
+body {
+  font-family: $quicksand;
+}
+.toast-invalid {
+  background-color: $error-text !important;
+  border-radius: 5px !important;
+  color: $off-white !important;
+}
+.toast-valid {
+  background-color: $success-text !important;
+  border-radius: 5px !important;
+  color: $off-white !important;
 }
