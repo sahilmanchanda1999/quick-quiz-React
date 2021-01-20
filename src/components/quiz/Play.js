@@ -75,12 +75,22 @@ class Play extends React.Component {
       classes: "toast-valid",
       displayLength: 1500,
     });
-    this.setState((prevState) => ({
-      score: prevState.score + 1,
-      correctAnswers: prevState.correctAnswers + 1,
-      currentQuestionIndex: prevState.currentQuestionIndex + 1,
-      numberOfAnsweredQuestions: prevState.numberOfAnsweredQuestions + 1,
-    }));
+    this.setState(
+      (prevState) => ({
+        score: prevState.score + 1,
+        correctAnswers: prevState.correctAnswers + 1,
+        currentQuestionIndex: prevState.currentQuestionIndex + 1,
+        numberOfAnsweredQuestions: prevState.numberOfAnsweredQuestions + 1,
+      }),
+      () => {
+        this.displayQuestions(
+          this.state.questions,
+          this.state.currentQuestion,
+          this.state.nextQuestion,
+          this.state.previoutQuestion
+        );
+      }
+    );
   };
   wrongAnswer = () => {
     navigator.vibrate(1000);
@@ -89,11 +99,21 @@ class Play extends React.Component {
       classes: "toast-invalid",
       displayLength: 1500,
     });
-    this.setState((prevState) => ({
-      wrongAnswers: prevState.wrongAnswers + 1,
-      currentQuestionIndex: prevState.currentQuestionIndex + 1,
-      numberOfAnsweredQuestions: prevState.numberOfAnsweredQuestions + 1,
-    }));
+    this.setState(
+      (prevState) => ({
+        wrongAnswers: prevState.wrongAnswers + 1,
+        currentQuestionIndex: prevState.currentQuestionIndex + 1,
+        numberOfAnsweredQuestions: prevState.numberOfAnsweredQuestions + 1,
+      }),
+      () => {
+        this.displayQuestions(
+          this.state.questions,
+          this.state.currentQuestion,
+          this.state.nextQuestion,
+          this.state.previoutQuestion
+        );
+      }
+    );
   };
   render() {
     const { currentQuestion } = this.state;
