@@ -4,6 +4,9 @@ import M from "materialize-css";
 
 import questions from "../../questions.json";
 import isEmpty from "../../utils/is-empty";
+import correctNotification from "../../assets/audio/correct-answer.mp3";
+import wrongNotification from "../../assets/audio/wrong-answer.mp3";
+import buttonSound from "../../assets/audio/button-sound.mp3";
 
 class Play extends React.Component {
   constructor(props) {
@@ -14,7 +17,7 @@ class Play extends React.Component {
       nextQuestion: {},
       previoutQuestion: {},
       answer: "",
-      numberOfQuestions: 0,
+      numberOfQuestions: questions.length,
       numberOfAnsweredQuestions: 0,
       currentQuestionIndex: 0,
       score: 0,
@@ -64,10 +67,22 @@ class Play extends React.Component {
   };
   handleOptionClick = (e) => {
     if (e.target.innerHTML.toLowerCase() === this.state.answer.toLowerCase()) {
+      setTimeout(() => {
+        document.getElementById("correct-sound").play();
+      }, 500);
       this.correctAnswer();
     } else {
+      setTimeout(() => {
+        document.getElementById("wrong-sound").play();
+      }, 500);
       this.wrongAnswer();
     }
+  };
+  handleButtonClick = () => {
+    this.playButtonSound();
+  };
+  playButtonSound = () => {
+    document.getElementById("button-sound").play();
   };
   correctAnswer = () => {
     M.toast({
@@ -116,12 +131,21 @@ class Play extends React.Component {
     );
   };
   render() {
-    const { currentQuestion } = this.state;
+    const {
+      currentQuestion,
+      currentQuestionIndex,
+      numberOfQuestions,
+    } = this.state;
     return (
       <Fragment>
         <Helmet>
           <title>Quiz Page</title>
         </Helmet>
+        <Fragment>
+          <audio id="correct-sound" src={correctNotification}></audio>
+          <audio id="wrong-sound" src={wrongNotification}></audio>
+          <audio id="button-sound" src={buttonSound}></audio>
+        </Fragment>
         <div className="questions">
           <h2>Quiz Mode</h2>
           <div className="lifeline-container">
@@ -136,7 +160,9 @@ class Play extends React.Component {
           </div>
           <div>
             <p>
-              <span className="left">1 of 15 </span>
+              <span className="left">
+                {currentQuestionIndex + 1} of {numberOfQuestions}{" "}
+              </span>
 
               <span className="right">
                 2:15<span className="mdi mdi-clock-outline mdi-24px"> </span>
@@ -161,9 +187,9 @@ class Play extends React.Component {
             </p>
           </div>
           <div className="button-container">
-            <button>Previous</button>
-            <button>Next</button>
-            <button>Quit</button>
+            <button onClick={this.handleButtonClick}>Previous</button>
+            <button onClick={this.handleButtonClick}>Next</button>
+            <button onClick={this.handleButtonClick}>Quit</button>
           </div>
         </div>
       </Fragment>
