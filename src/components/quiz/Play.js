@@ -26,6 +26,7 @@ class Play extends React.Component {
       hints: 5,
       fiftyFifty: 2,
       usedFiftyFifty: false,
+      previousRandomNumbers: [],
       time: {},
     };
   }
@@ -57,12 +58,18 @@ class Play extends React.Component {
       nextQuestion = questions[currentQuestionIndex + 1];
       previoutQuestion = questions[currentQuestionIndex - 1];
       const answer = currentQuestion.answer;
-      this.setState({
-        currentQuestion,
-        nextQuestion,
-        previoutQuestion,
-        answer,
-      });
+      this.setState(
+        {
+          currentQuestion,
+          nextQuestion,
+          previoutQuestion,
+          answer,
+          previousRandomNumbers: [],
+        },
+        () => {
+          this.showOptions();
+        }
+      );
     }
   };
   handleOptionClick = (e) => {
@@ -81,7 +88,7 @@ class Play extends React.Component {
 
   handleNextButtonClick = () => {
     this.playButtonSound();
-    if (this.state.nextQuestion != undefined) {
+    if (this.state.nextQuestion !== undefined) {
       this.setState(
         (prevState) => ({
           currentQuestionIndex: prevState.currentQuestionIndex + 1,
@@ -99,7 +106,7 @@ class Play extends React.Component {
   };
   handlePreviousButtonClick = () => {
     this.playButtonSound();
-    if (this.state.previoutQuestion != undefined) {
+    if (this.state.previoutQuestion !== undefined) {
       this.setState(
         (prevState) => ({
           currentQuestionIndex: prevState.currentQuestionIndex - 1,
@@ -190,11 +197,56 @@ class Play extends React.Component {
       }
     );
   };
+
+  showOptions = () => {
+    const options = Array.from(document.querySelectorAll(".option"));
+    options.forEach((option) => {
+      option.style.visibility = "visible";
+    });
+  };
+
+  handleHints = () => {
+    if (this.state.hints > 0) {
+      const options = Array.from(document.querySelectorAll(".option"));
+      let indexOfAnswer;
+      options.forEach((option, index) => {
+        if (
+          option.innerHTML.toLowerCase() === this.state.answer.toLowerCase()
+        ) {
+          indexOfAnswer = index;
+        }
+      });
+      while (true) {
+        const randomNumber = Math.round(Math.random() * 3);
+        if (
+          randomNumber !== indexOfAnswer &&
+          !this.state.previousRandomNumbers.includes(randomNumber)
+        ) {
+          options.forEach((option, index) => {
+            if (index === randomNumber) {
+              option.style.visibility = "hidden";
+              this.setState((prevState) => ({
+                hints: prevState.hints - 1,
+                previousRandomNumbers: prevState.previousRandomNumbers.concat(
+                  randomNumber
+                ),
+              }));
+            }
+          });
+          break;
+        }
+        if (this.state.previousRandomNumbers.length >= 3) break;
+      }
+    }
+  };
+
   render() {
     const {
       currentQuestion,
       currentQuestionIndex,
       numberOfQuestions,
+      hints,
+      fiftyFifty,
     } = this.state;
     return (
       <Fragment>
@@ -211,11 +263,14 @@ class Play extends React.Component {
           <div className="lifeline-container">
             <p>
               <span className="mdi mdi-set-center mdi-24px lifeline-icon"></span>
-              <span className="lifeline"> 2</span>
+              <span className="lifeline"> {fiftyFifty}</span>
             </p>
             <p>
-              <span className="mdi mdi-lightbulb-on-outline mdi-24px lifeline-icon"></span>
-              <span className="lifeline">5</span>
+              <span
+                onClick={this.handleHints}
+                className="mdi mdi-lightbulb-on-outline mdi-24px lifeline-icon"
+              ></span>
+              <span className="lifeline">{hints}</span>
             </p>
           </div>
           <div>
