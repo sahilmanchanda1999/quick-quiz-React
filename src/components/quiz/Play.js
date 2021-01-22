@@ -7,6 +7,7 @@ import isEmpty from "../../utils/is-empty";
 import correctNotification from "../../assets/audio/correct-answer.mp3";
 import wrongNotification from "../../assets/audio/wrong-answer.mp3";
 import buttonSound from "../../assets/audio/button-sound.mp3";
+import classnames from "classnames";
 
 class Play extends React.Component {
   constructor(props) {
@@ -26,6 +27,8 @@ class Play extends React.Component {
       hints: 5,
       fiftyFifty: 2,
       usedFiftyFifty: false,
+      nextButtonDisabled: false,
+      previousButtonDisabled: true,
       previousRandomNumbers: [],
       time: {},
     };
@@ -70,6 +73,7 @@ class Play extends React.Component {
         },
         () => {
           this.showOptions();
+          this.handleDisabledButton();
         }
       );
     }
@@ -326,6 +330,32 @@ class Play extends React.Component {
       }
     }, 1000);
   };
+  handleDisabledButton = () => {
+    if (
+      this.state.previoutQuestion === undefined ||
+      this.state.currentQuestionIndex === 0
+    ) {
+      this.setState({
+        previousButtonDisabled: true,
+      });
+    } else {
+      this.setState({
+        previousButtonDisabled: false,
+      });
+    }
+    if (
+      this.state.nextQuestion === undefined ||
+      this.state.currentQuestionIndex + 1 === this.state.numberOfQuestions
+    ) {
+      this.setState({
+        nextButtonDisabled: true,
+      });
+    } else {
+      this.setState({
+        nextButtonDisabled: false,
+      });
+    }
+  };
   render() {
     const {
       currentQuestion,
@@ -395,10 +425,22 @@ class Play extends React.Component {
             </p>
           </div>
           <div className="button-container">
-            <button id="previous-button" onClick={this.handleButtonClick}>
+            <button
+              className={classnames("", {
+                disable: this.state.previousButtonDisabled,
+              })}
+              id="previous-button"
+              onClick={this.handleButtonClick}
+            >
               Previous
             </button>
-            <button id="next-button" onClick={this.handleButtonClick}>
+            <button
+              className={classnames("", {
+                disable: this.state.nextButtonDisabled,
+              })}
+              id="next-button"
+              onClick={this.handleButtonClick}
+            >
               Next
             </button>
             <button id="quit-button" onClick={this.handleButtonClick}>
