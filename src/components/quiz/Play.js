@@ -33,6 +33,9 @@ class Play extends React.Component {
       time: {},
     };
     this.interval = null;
+    this.correctSound = React.createRef();
+    this.wrongSound = React.createRef();
+    this.buttonSound = React.createRef();
   }
   componentDidMount() {
     const {
@@ -50,6 +53,11 @@ class Play extends React.Component {
     );
     this.startTimer();
   }
+
+  componentWillMount() {
+    clearInterval(this.interval);
+  }
+
   displayQuestions = (
     questions = this.state.questions,
     currentQuestion,
@@ -81,12 +89,12 @@ class Play extends React.Component {
   handleOptionClick = (e) => {
     if (e.target.innerHTML.toLowerCase() === this.state.answer.toLowerCase()) {
       setTimeout(() => {
-        document.getElementById("correct-sound").play();
+        this.correctSound.current.play();
       }, 500);
       this.correctAnswer();
     } else {
       setTimeout(() => {
-        document.getElementById("wrong-sound").play();
+        this.wrongSound.current.play();
       }, 500);
       this.wrongAnswer();
     }
@@ -154,7 +162,7 @@ class Play extends React.Component {
   };
 
   playButtonSound = () => {
-    document.getElementById("button-sound").play();
+    this.buttonSound.current.play();
   };
 
   correctAnswer = () => {
@@ -171,12 +179,16 @@ class Play extends React.Component {
         numberOfAnsweredQuestions: prevState.numberOfAnsweredQuestions + 1,
       }),
       () => {
-        this.displayQuestions(
-          this.state.questions,
-          this.state.currentQuestion,
-          this.state.nextQuestion,
-          this.state.previoutQuestion
-        );
+        if (this.state.nextQuestion === undefined) {
+          this.endGame();
+        } else {
+          this.displayQuestions(
+            this.state.questions,
+            this.state.currentQuestion,
+            this.state.nextQuestion,
+            this.state.previoutQuestion
+          );
+        }
       }
     );
   };
@@ -194,12 +206,16 @@ class Play extends React.Component {
         numberOfAnsweredQuestions: prevState.numberOfAnsweredQuestions + 1,
       }),
       () => {
-        this.displayQuestions(
-          this.state.questions,
-          this.state.currentQuestion,
-          this.state.nextQuestion,
-          this.state.previoutQuestion
-        );
+        if (this.state.nextQuestion === undefined) {
+          this.endGame();
+        } else {
+          this.displayQuestions(
+            this.state.questions,
+            this.state.currentQuestion,
+            this.state.nextQuestion,
+            this.state.previoutQuestion
+          );
+        }
       }
     );
   };
@@ -316,8 +332,7 @@ class Play extends React.Component {
             },
           },
           () => {
-            alert("Quiz has ended!");
-            this.props.history.push("/");
+            this.endGame();
           }
         );
       } else {
@@ -356,6 +371,24 @@ class Play extends React.Component {
       });
     }
   };
+
+  endGame = () => {
+    alert("Quiz has ended!");
+    const { state } = this;
+    const playerStats = {
+      score: state.score,
+      numberOfQuestions: state.numberOfQuestions,
+      numberOfAnsweredQuestions: state.numberOfAnsweredQuestions,
+      correctAnswers: state.correctAnswers,
+      wrongAnswers: state.wrongAnswers,
+      fiftyFiftyUsed: 2 - state.fiftyFifty,
+      hintsUsed: 5 - state.hints,
+    };
+    console.log(playerStats);
+    setTimeout(() => {
+      this.props.history.push("/");
+    }, 1000);
+  };
   render() {
     const {
       currentQuestion,
@@ -371,9 +404,9 @@ class Play extends React.Component {
           <title>Quiz Page</title>
         </Helmet>
         <Fragment>
-          <audio id="correct-sound" src={correctNotification}></audio>
-          <audio id="wrong-sound" src={wrongNotification}></audio>
-          <audio id="button-sound" src={buttonSound}></audio>
+          <audio ref={this.correctSound} src={correctNotification}></audio>
+          <audio ref={this.wrongSound} src={wrongNotification}></audio>
+          <audio ref={this.buttonSound} src={buttonSound}></audio>
         </Fragment>
         <div className="questions">
           <h2>Quiz Mode</h2>
