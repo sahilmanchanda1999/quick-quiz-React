@@ -1,0 +1,29 @@
+{
+  "files": {
+    "main.css": "/static/css/main.b860f25f.chunk.css",
+    "main.js": "/static/js/main.d3011140.chunk.js",
+    "main.js.map": "/static/js/main.d3011140.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.bc118647.js",
+    "runtime-main.js.map": "/static/js/runtime-main.bc118647.js.map",
+    "static/css/2.f3229433.chunk.css": "/static/css/2.f3229433.chunk.css",
+    "static/js/2.5b42eec9.chunk.js": "/static/js/2.5b42eec9.chunk.js",
+    "static/js/2.5b42eec9.chunk.js.map": "/static/js/2.5b42eec9.chunk.js.map",
+    "index.html": "/index.html",
+    "static/css/2.f3229433.chunk.css.map": "/static/css/2.f3229433.chunk.css.map",
+    "static/css/main.b860f25f.chunk.css.map": "/static/css/main.b860f25f.chunk.css.map",
+    "static/js/2.5b42eec9.chunk.js.LICENSE.txt": "/static/js/2.5b42eec9.chunk.js.LICENSE.txt",
+    "static/media/answers.e4f1b32b.png": "/static/media/answers.e4f1b32b.png",
+    "static/media/styles.scss": "/static/media/background.8a7e7601.jpg",
+    "static/media/button-sound.8277ab8c.mp3": "/static/media/button-sound.8277ab8c.mp3",
+    "static/media/correct-answer.e1cf8406.mp3": "/static/media/correct-answer.e1cf8406.mp3",
+    "static/media/materialdesignicons.min.css": "/static/media/materialdesignicons-webfont.d06df622.woff",
+    "static/media/wrong-answer.e08b616b.mp3": "/static/media/wrong-answer.e08b616b.mp3"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.bc118647.js",
+    "static/css/2.f3229433.chunk.css",
+    "static/js/2.5b42eec9.chunk.js",
+    "static/css/main.b860f25f.chunk.css",
+    "static/js/main.d3011140.chunk.js"
+  ]
+}
