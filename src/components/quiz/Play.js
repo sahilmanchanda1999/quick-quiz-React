@@ -384,9 +384,9 @@ class Play extends React.Component {
       fiftyFiftyUsed: 2 - state.fiftyFifty,
       hintsUsed: 5 - state.hints,
     };
-    console.log(playerStats);
+
     setTimeout(() => {
-      this.props.history.push("/");
+      this.props.history.push("/play/quizSummary", playerStats);
     }, 1000);
   };
   render() {
