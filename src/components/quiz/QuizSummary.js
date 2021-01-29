@@ -27,27 +27,27 @@ class QuizSummary extends React.Component {
   render() {
     const { state } = this.props.location;
     let stats, remark;
-
-    if (state.score <= 30) {
-      remark = "You need more Practice!";
-    } else if (state.score > 30 && state.score <= 50) {
-      remark = "Better luck next Time!";
-    } else if (state.score > 50 && state.score <= 70) {
-      remark = "You can do better";
-    } else if (state.score >= 71 && state.score <= 84) {
-      remark = "You did great!";
-    } else {
-      remark = "You're an absolute genius!";
+    if (state) {
+      if (state.score <= 30) {
+        remark = "You need more Practice!";
+      } else if (state.score > 30 && state.score <= 50) {
+        remark = "Better luck next Time!";
+      } else if (state.score > 50 && state.score <= 70) {
+        remark = "You can do better";
+      } else if (state.score >= 71 && state.score <= 84) {
+        remark = "You did great!";
+      } else {
+        remark = "You're an absolute genius!";
+      }
     }
-
     if (state !== undefined) {
       stats = (
         <Fragment>
-          <div>
-            <span className="mdi mid-check-circle-outline success-icon"></span>
+          <div style={{ textAlign: "center" }}>
+            <span className="mdi mdi-check-circle-outline success-icon"></span>
           </div>
           <h1>Quiz has ended</h1>
-          <div className="container">
+          <div className="container stats">
             <h4>{remark}</h4>
             <h2>Your Score: {this.state.score.toFixed(0)}&#37;</h2>
             <span className="stat left">Total number of questions:</span>
@@ -74,12 +74,12 @@ class QuizSummary extends React.Component {
             <br />
           </div>
           <section>
-            <ul>
-              <li>
-                <Link to="/">Back To Home</Link>
-              </li>
-              <li>
+            <ul className="summaryButtons">
+              <li className="leftButton">
                 <Link to="/play/quiz">Play Again</Link>
+              </li>
+              <li className="rightButton">
+                <Link to="/">Back To Home</Link>
               </li>
             </ul>
           </section>
@@ -89,12 +89,12 @@ class QuizSummary extends React.Component {
       stats = (
         <section>
           <h1 className="no-stats">No Statistics Available</h1>
-          <ul>
-            <li>
-              <Link to="/">Back To Home</Link>
+          <ul className="summaryButtons">
+            <li className="leftButton">
+              <Link to="/play/quiz">Play Again</Link>
             </li>
-            <li>
-              <Link to="/play/quiz">Take a Quiz</Link>
+            <li className="rightButton">
+              <Link to="/">Back To Home</Link>
             </li>
           </ul>
         </section>

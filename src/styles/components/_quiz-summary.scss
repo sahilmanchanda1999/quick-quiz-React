@@ -1,0 +1,74 @@
+.success-icon {
+  font-size: 8rem;
+  color: $green;
+}
+h1 {
+  color: $green;
+  text-align: center;
+  margin-top: -20px !important;
+}
+.stats {
+  background-color: $off-white;
+  border-radius: 5px;
+  padding-left: $md;
+  padding-right: $md;
+  padding-bottom: $md;
+  height: 80%;
+  width: 35%;
+}
+h4 {
+  text-align: center;
+  padding: 30px !important;
+}
+h2 {
+  text-align: center;
+  color: $blue;
+  margin-top: -10px !important;
+}
+.leftButton {
+  border: 2px solid;
+  color: $blue;
+  text-align: center;
+  padding-left: $normal;
+  padding-right: $normal;
+  cursor: pointer;
+  margin-right: 30px !important;
+  a {
+    transition: 0.2s linear all;
+  }
+}
+.leftButton:hover {
+  background-color: $blue;
+  a {
+    color: #fff;
+  }
+}
+.rightButton {
+  border: 2px solid;
+  color: $green;
+  padding-left: $normal;
+  padding-right: $normal;
+  cursor: pointer;
+  text-decoration-color: $green;
+  text-align: center;
+  a {
+    color: $green;
+    transition: 0.2s linear all;
+  }
+}
+.rightButton:hover {
+  background-color: $green;
+  a {
+    color: #fff;
+  }
+}
+.summaryButtons {
+  text-align: center !important;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-top: $lg;
+}
+.no-stats {
+  margin-top: 50px !important;
+}
