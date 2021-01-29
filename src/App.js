@@ -7,7 +7,7 @@ import QuizSummary from "./components/quiz/QuizSummary";
 
 function App() {
   return (
-    <Router>
+    <Router basename={process.env.PUBLIC_URL}>
       <Route path="/" exact component={Home} />
       <Route path="/play/instructions" exact component={QuizInstructions} />
       <Route path="/play/quiz" exact component={Play} />
