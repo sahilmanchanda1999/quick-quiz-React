@@ -25,16 +25,16 @@ class QuizSummary extends React.Component {
     }
   }
   render() {
-    const { state, score } = this.props.location;
+    const { state } = this.props.location;
     let stats, remark;
 
-    if (score <= 30) {
+    if (state.score <= 30) {
       remark = "You need more Practice!";
-    } else if (score > 30 && score <= 50) {
+    } else if (state.score > 30 && state.score <= 50) {
       remark = "Better luck next Time!";
-    } else if (score > 50 && score <= 70) {
+    } else if (state.score > 50 && state.score <= 70) {
       remark = "You can do better";
-    } else if (score >= 71 && score <= 84) {
+    } else if (state.score >= 71 && state.score <= 84) {
       remark = "You did great!";
     } else {
       remark = "You're an absolute genius!";
@@ -53,20 +53,25 @@ class QuizSummary extends React.Component {
             <span className="stat left">Total number of questions:</span>
             <span className="right">{this.state.numberOfQuestions}</span>
             <br />
-            <span className="stat left">Total number of questions:</span>
-            <span className="right">{this.state.numberOfQuestions}</span>
+            <span className="stat left">
+              Total number of Attempted Questions:
+            </span>
+            <span className="right">
+              {this.state.numberOfAnsweredQuestions}
+            </span>
             <br />
-            <span className="stat left">Total number of questions:</span>
-            <span className="right">{this.state.numberOfQuestions}</span>
+            <span className="stat left">Total number of Correct Answers:</span>
+            <span className="right">{this.state.correctAnswers}</span>
             <br />
-            <span className="stat left">Total number of questions:</span>
-            <span className="right">{this.state.numberOfQuestions}</span>
+            <span className="stat left">Total number of Wrong Answers:</span>
+            <span className="right">{this.state.wrongAnswers}</span>
             <br />
-            <span className="stat left">Total number of questions:</span>
-            <span className="right">{this.state.numberOfQuestions}</span>
+            <span className="stat left">Hints Used:</span>
+            <span className="right">{this.state.hintsUsed}</span>
             <br />
-            <span className="stat left">Total number of questions:</span>
-            <span className="right">{this.state.numberOfQuestions}</span>
+            <span className="stat left">50-50 Used:</span>
+            <span className="right">{this.state.fiftyFiftyUsed}</span>
+            <br />
           </div>
           <section>
             <ul>
